@@ -1,9 +1,6 @@
 package jobrunner
 
 import (
-	"fmt"
-	"time"
-
 	"gopkg.in/robfig/cron.v2"
 )
 
