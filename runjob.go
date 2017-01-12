@@ -47,10 +47,22 @@ func Now(job cron.Job) {
 	go New(job).Run()
 }
 
-// Run the given job once, after the given delay.
 func In(duration time.Duration, job cron.Job) {
 	go func() {
 		time.Sleep(duration)
 		New(job).Run()
 	}()
+}
+
+func At(str string, job cron.Job) bool {
+	const layout = "2006-01-02 15:04:05"
+	t, err := time.Parse(layout, str)
+	if err != nil {
+		return false
+	}
+	go func() {
+		time.Sleep(time.Now().UTC().Sub(t.UTC()))
+		New(job).Run()
+	}()
+	return true
 }

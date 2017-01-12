@@ -7,7 +7,7 @@ import (
 	"gopkg.in/robfig/cron.v2"
 )
 
-const DEFAULT_JOB_POOL_SIZE = 10
+const DEFAULT_JOB_POOL_SIZE = 100
 
 var (
 	// Singleton instance of the underlying job scheduler.
@@ -18,12 +18,6 @@ var (
 
 	// Is a single job allowed to run concurrently with itself?
 	selfConcurrent bool
-)
-
-var (
-	green   = string([]byte{27, 91, 57, 55, 59, 52, 50, 109})
-	magenta = string([]byte{27, 91, 57, 55, 59, 52, 53, 109})
-	reset   = string([]byte{27, 91, 48, 109})
 )
 
 func Start(v ...int) {
@@ -44,10 +38,5 @@ func Start(v ...int) {
 			selfConcurrent = false
 		}
 	}
-
 	MainCron.Start()
-
-	fmt.Printf("%s[JobRunner] %v Started... %s \n",
-		magenta, time.Now().Format("2006/01/02 - 15:04:05"), reset)
-
 }
