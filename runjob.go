@@ -61,7 +61,7 @@ func At(str string, job cron.Job) bool {
 		return false
 	}
 	go func() {
-		time.Sleep(time.Now().UTC().Sub(t.UTC()))
+		time.Sleep(t.UTC().Sub(time.Now().UTC()))
 		New(job).Run()
 	}()
 	return true
